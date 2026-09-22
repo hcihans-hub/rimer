@@ -1,0 +1,56 @@
+# ========================
+# .NET / ASP.NET Core
+# ========================
+bin/
+obj/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+.vs/
+TestResults/
+*.ncrunchsolution
+*.ncrunchproject
+
+# ========================
+# Hassas Konfigürasyonlar (SECRET)
+# ========================
+appsettings.Development.json
+# appsettings.json template olarak kalır ama Production secrets gitignore'a eklenebilir
+
+# Log dosyaları
+src/RimerApi.API/Logs/
+Logs/
+*.log
+*.txt.log
+
+# Audit arşivleri
+src/RimerApi.API/AuditArchives/
+
+# ========================
+# Node / Frontend
+# ========================
+node_modules/
+rimer-dashboard/node_modules/
+rimer-dashboard/dist/
+rimer-dashboard/.vite/
+dist/
+.env
+.env.local
+.env.production
+
+# ========================
+# IDE & OS
+# ========================
+.vscode/
+.idea/
+*.DS_Store
+Thumbs.db
+desktop.ini
+
+# ========================
+# Test & Benchmark Çıktıları
+# ========================
+k6-tests/results/
+metrics_result.txt
+scratch/

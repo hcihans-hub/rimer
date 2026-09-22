@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Rimer — Admin Dashboard</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+  <style>
+    :root {
+      --bg:        #0a0e1a;
+      --surface:   #111827;
+      --surface2:  #1a2235;
+      --border:    rgba(255,255,255,0.07);
+      --text:      #e2e8f0;
+      --muted:     #64748b;
+      --blue:      #3b82f6;
+      --indigo:    #6366f1;
+      --green:     #10b981;
+      --yellow:    #f59e0b;
+      --red:       #ef4444;
+      --purple:    #8b5cf6;
+      --teal:      #14b8a6;
+      --orange:    #f97316;
+      --radius:    14px;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; }
+
+    /* ── Login Overlay ── */
+    #login-overlay {
+      position: fixed; inset: 0; background: var(--bg);
+      display: flex; align-items: center; justify-content: center; z-index: 100;
+    }
+    .login-card {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 20px; padding: 40px; width: 100%; max-width: 420px;
+      box-shadow: 0 25px 60px rgba(0,0,0,0.5);
+    }
+    .login-logo { display: flex; align-items: center; gap: 12px; margin-bottom: 32px; }
+    .login-logo .dot { width: 38px; height: 38px; border-radius: 10px;
+      background: linear-gradient(135deg, var(--blue), var(--indigo)); }
+    .login-logo h1 { font-size: 22px; font-weight: 700; }
+    .login-card h2 { font-size: 18px; font-weight: 600; margin-bottom: 6px; }
+    .login-card p  { color: var(--muted); font-size: 14px; margin-bottom: 28px; }
+    .form-group { margin-bottom: 18px; }
+    .form-group label { display: block; font-size: 13px; font-weight: 500; margin-bottom: 6px; color: var(--muted); }
+    .form-group input {
+      width: 100%; padding: 11px 14px; background: var(--surface2);
+      border: 1px solid var(--border); border-radius: 10px;
+      color: var(--text); font-size: 14px; font-family: inherit; outline: none;
+      transition: border-color .2s;
+    }
+    .form-group input:focus { border-color: var(--blue); }
+    .btn-login {
+      width: 100%; padding: 12px; background: linear-gradient(135deg, var(--blue), var(--indigo));
+      border: none; border-radius: 10px; color: #fff; font-size: 15px; font-weight: 600;
+      cursor: pointer; transition: opacity .2s; font-family: inherit;
+    }
+    .btn-login:hover { opacity: 0.9; }
+    .login-error { color: var(--red); font-size: 13px; margin-top: 12px; display: none; }
+
+    /* ── App Shell ── */
+    #app { display: none; }
+    .topbar {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 16px 28px; background: var(--surface); border-bottom: 1px solid var(--border);
+      position: sticky; top: 0; z-index: 50;
+    }
+    .topbar-left { display: flex; align-items: center; gap: 12px; }
+    .logo-dot { width: 32px; height: 32px; border-radius: 8px;
+      background: linear-gradient(135deg, var(--blue), var(--indigo)); flex-shrink: 0; }
+    .topbar-left h1 { font-size: 17px; font-weight: 700; }
+    .topbar-left span { font-size: 12px; color: var(--muted); font-weight: 400; }
+    .topbar-right { display: flex; align-items: center; gap: 14px; }
+    .badge-env { background: rgba(16,185,129,0.15); color: var(--green);
+      padding: 4px 10px; border-radius: 20px; font-size: 11px; font-weight: 600; }
+    .btn-refresh {
+      background: var(--surface2); border: 1px solid var(--border); color: var(--text);
+      padding: 7px 16px; border-radius: 8px; cursor: pointer; font-size: 13px; font-family: inherit;
+      transition: background .2s;
+    }
+    .btn-refresh:hover { background: #233044; }
+    .btn-logout {
+      background: rgba(239,68,68,0.1); border: 1px solid rgba(239,68,68,0.2);
+      color: var(--red); padding: 7px 16px; border-radius: 8px; cursor: pointer;
+      font-size: 13px; font-family: inherit; transition: background .2s;
+    }
+    .btn-logout:hover { background: rgba(239,68,68,0.2); }
+
+    /* ── Main ── */
+    main { padding: 28px; max-width: 1400px; margin: 0 auto; }
+    .section-title {
+      font-size: 12px; font-weight: 600; text-transform: uppercase;
+      letter-spacing: 1px; color: var(--muted); margin-bottom: 16px;
+    }
+
+    /* ── KPI Cards ── */
+    .kpi-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; margin-bottom: 28px; }
+    .kpi-card {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 22px 24px;
+      position: relative; overflow: hidden; transition: transform .2s, box-shadow .2s;
+    }
+    .kpi-card:hover { transform: translateY(-2px); box-shadow: 0 12px 30px rgba(0,0,0,0.3); }
+    .kpi-card::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+      background: var(--accent);
+    }
+    .kpi-label { font-size: 12px; color: var(--muted); font-weight: 500; margin-bottom: 10px; text-transform: uppercase; letter-spacing: 0.5px; }
+    .kpi-value { font-size: 36px; font-weight: 800; line-height: 1; color: var(--text); }
+    .kpi-sub { font-size: 12px; color: var(--muted); margin-top: 6px; }
+    .kpi-icon {
+      position: absolute; right: 18px; top: 18px;
+      width: 38px; height: 38px; border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 18px; background: var(--icon-bg);
+    }
+
+    /* ── Charts Grid ── */
+    .charts-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 28px; }
+    .chart-card {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 24px;
+    }
+    .chart-card.full { grid-column: 1 / -1; }
+    .chart-title { font-size: 15px; font-weight: 600; margin-bottom: 20px; }
+    .chart-subtitle { font-size: 12px; color: var(--muted); font-weight: 400; }
+    .chart-wrap { position: relative; height: 240px; }
+    .chart-wrap.tall { height: 300px; }
+
+    /* ── Department Table ── */
+    .dept-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 28px; }
+    .dept-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 24px; }
+    table { width: 100%; border-collapse: collapse; }
+    th { font-size: 11px; text-transform: uppercase; letter-spacing: 0.5px; color: var(--muted); font-weight: 600; padding: 8px 12px; text-align: left; }
+    td { padding: 12px 12px; font-size: 13px; border-top: 1px solid var(--border); }
+    tr:first-child td { border-top: none; }
+    .badge {
+      display: inline-flex; align-items: center; gap: 5px;
+      padding: 3px 9px; border-radius: 20px; font-size: 11px; font-weight: 600;
+    }
+    .badge-open    { background: rgba(59,130,246,0.15); color: var(--blue); }
+    .badge-inprog  { background: rgba(245,158,11,0.15); color: var(--yellow); }
+    .badge-closed  { background: rgba(16,185,129,0.15); color: var(--green); }
+    .badge-complaint { background: rgba(239,68,68,0.15); color: var(--red); }
+    .badge-suggestion { background: rgba(99,102,241,0.15); color: var(--indigo); }
+    .badge-request { background: rgba(245,158,11,0.15); color: var(--yellow); }
+    .badge-thanks  { background: rgba(16,185,129,0.15); color: var(--green); }
+
+    /* ── Resolution ring ── */
+    .ring-wrap { display: flex; align-items: center; justify-content: center; gap: 32px; }
+    .ring-labels { display: flex; flex-direction: column; gap: 14px; }
+    .ring-label-item { display: flex; align-items: center; gap: 10px; font-size: 13px; }
+    .ring-dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
+
+    /* ── Recent Tickets ── */
+    .recent-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 24px; margin-bottom: 28px; }
+    .priority-dot { width: 8px; height: 8px; border-radius: 50%; display: inline-block; }
+    .p1 { background: var(--green); }
+    .p2 { background: var(--yellow); }
+    .p3 { background: var(--red); }
+
+    /* ── Spinner ── */
+    .spinner-wrap { display: flex; align-items: center; justify-content: center; height: 180px; }
+    .spinner { width: 40px; height: 40px; border: 3px solid var(--border); border-top-color: var(--blue); border-radius: 50%; animation: spin .7s linear infinite; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    /* ── Counter animation ── */
+    @keyframes countUp { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+    .kpi-value { animation: countUp .5s ease forwards; }
+
+    /* ── Responsive ── */
+    @media (max-width: 900px) {
+      .charts-grid, .dept-grid { grid-template-columns: 1fr; }
+      .chart-card.full { grid-column: 1; }
+    }
+    @media (max-width: 600px) {
+      .kpi-grid { grid-template-columns: 1fr 1fr; }
+      main { padding: 16px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ══════════════════════ LOGIN ══════════════════════ -->
+<div id="login-overlay">
+  <div class="login-card">
+    <div class="login-logo">
+      <div class="dot"></div>
+      <h1>Rimer Admin</h1>
+    </div>
+    <h2>Giriş Yap</h2>
+    <p>Dashboard'a erişmek için admin hesabınızla oturum açın.</p>
+    <div class="form-group">
+      <label>E-posta</label>
+      <input type="email" id="login-email" value="admin@rimer.edu" placeholder="admin@rimer.edu" />
+    </div>
+    <div class="form-group">
+      <label>Şifre</label>
+      <input type="password" id="login-password" placeholder="••••••••" />
+    </div>
+    <button class="btn-login" id="btn-login" onclick="doLogin()">Giriş Yap</button>
+    <div class="login-error" id="login-error"></div>
+  </div>
+</div>
+
+<!-- ══════════════════════ APP ══════════════════════ -->
+<div id="app">
+  <nav class="topbar">
+    <div class="topbar-left">
+      <div class="logo-dot"></div>
+      <div>
+        <h1>Rimer Dashboard</h1>
+        <span>Rektörlük İletişim Merkezi — Admin Paneli</span>
+      </div>
+    </div>
+    <div class="topbar-right">
+      <span class="badge-env">● Canlı</span>
+      <button class="btn-refresh" onclick="loadDashboard()">↻ Yenile</button>
+      <button class="btn-logout" onclick="logout()">Çıkış</button>
+    </div>
+  </nav>
+
+  <main>
+    <div id="loading" class="spinner-wrap"><div class="spinner"></div></div>
+    <div id="content" style="display:none">
+
+      <!-- KPI Cards -->
+      <div class="section-title">📋 Ticket Genel Bakış</div>
+      <div class="kpi-grid" id="kpi-grid"></div>
+
+      <!-- User KPIs -->
+      <div class="section-title">👥 Kullanıcı İstatistikleri</div>
+      <div class="kpi-grid" id="user-kpi-grid"></div>
+
+      <!-- Charts Row 1 -->
+      <div class="charts-grid">
+        <div class="chart-card">
+          <div class="chart-title">Durum Dağılımı <span class="chart-subtitle">— Donut</span></div>
+          <div class="chart-wrap"><canvas id="statusChart"></canvas></div>
+        </div>
+        <div class="chart-card">
+          <div class="chart-title">Kategori Dağılımı <span class="chart-subtitle">— Bar</span></div>
+          <div class="chart-wrap"><canvas id="categoryChart"></canvas></div>
+        </div>
+        <div class="chart-card full">
+          <div class="chart-title">Son 14 Günlük Trend <span class="chart-subtitle">— Günlük yeni ticket sayısı</span></div>
+          <div class="chart-wrap tall"><canvas id="trendChart"></canvas></div>
+        </div>
+      </div>
+
+      <!-- Department Table -->
+      <div class="section-title">🏛️ Departman Bazlı Dağılım</div>
+      <div class="dept-grid">
+        <div class="dept-card" style="grid-column: 1/-1;">
+          <table id="dept-table">
+            <thead>
+              <tr>
+                <th>Departman</th>
+                <th>Toplam</th>
+                <th>Açık</th>
+                <th>Kapalı</th>
+                <th>Çözüm Oranı</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Recent Tickets -->
+      <div class="section-title">🕐 Son Ticketlar</div>
+      <div class="recent-card">
+        <table id="recent-table">
+          <thead>
+            <tr>
+              <th>Önc.</th>
+              <th>Başlık</th>
+              <th>Kategori</th>
+              <th>Durum</th>
+              <th>Tarih</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+
+    </div><!-- /content -->
+  </main>
+</div><!-- /app -->
+
+<script>
+const API = 'http://localhost:5000';
+let charts = {};
+
+// ── Auth ──────────────────────────────────────────────────────────
+async function doLogin() {
+  const email    = document.getElementById('login-email').value.trim();
+  const password = document.getElementById('login-password').value;
+  const errEl    = document.getElementById('login-error');
+  const btn      = document.getElementById('btn-login');
+  errEl.style.display = 'none';
+  btn.textContent = 'Giriş yapılıyor...';
+  btn.disabled = true;
+  try {
+    const res = await fetch(`${API}/api/auth/login`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email, password })
+    });
+    const data = await res.json();
+    if (!res.ok || !data.data?.token) throw new Error(data.message || 'Giriş başarısız.');
+    localStorage.setItem('rimer_token', data.data.token);
+    document.getElementById('login-overlay').style.display = 'none';
+    document.getElementById('app').style.display = 'block';
+    await loadDashboard();
+  } catch(e) {
+    errEl.textContent = e.message;
+    errEl.style.display = 'block';
+  } finally {
+    btn.textContent = 'Giriş Yap';
+    btn.disabled = false;
+  }
+}
+
+function logout() {
+  localStorage.removeItem('rimer_token');
+  location.reload();
+}
+
+function authHeader() {
+  return { 'Authorization': `Bearer ${localStorage.getItem('rimer_token')}`, 'Content-Type': 'application/json' };
+}
+
+// ── Load Dashboard ────────────────────────────────────────────────
+async function loadDashboard() {
+  document.getElementById('loading').style.display = 'flex';
+  document.getElementById('content').style.display = 'none';
+  destroyCharts();
+  try {
+    const res  = await fetch(`${API}/api/dashboard/stats`, { headers: authHeader() });
+    if (res.status === 401) { logout(); return; }
+    const wrap = await res.json();
+    const d    = wrap.data;
+    renderKPIs(d);
+    renderUserKPIs(d);
+    renderStatusChart(d);
+    renderCategoryChart(d);
+    renderTrendChart(d);
+    renderDeptTable(d);
+    renderRecentTable(d);
+    document.getElementById('loading').style.display = 'none';
+    document.getElementById('content').style.display = 'block';
+  } catch(e) {
+    document.getElementById('loading').innerHTML = `<p style="color:var(--red)">Veri yüklenemedi: ${e.message}</p>`;
+  }
+}
+
+// ── KPI Render ────────────────────────────────────────────────────
+function renderKPIs(d) {
+  const cards = [
+    { label: 'Toplam Ticket', value: d.totalTickets,      icon: '🎫', accent: '#6366f1', iconBg: 'rgba(99,102,241,0.15)', sub: 'Tüm zamanlar' },
+    { label: 'Açık',          value: d.openTickets,       icon: '📬', accent: '#3b82f6', iconBg: 'rgba(59,130,246,0.15)',  sub: 'Yanıt bekliyor' },
+    { label: 'Devam Eden',    value: d.inProgressTickets, icon: '⚙️', accent: '#f59e0b', iconBg: 'rgba(245,158,11,0.15)',  sub: 'İşlemde' },
+    { label: 'Kapalı',        value: d.closedTickets,     icon: '✅', accent: '#10b981', iconBg: 'rgba(16,185,129,0.15)',  sub: 'Çözümlendi' },
+    { label: 'Çözüm Oranı',  value: d.resolutionRate+'%',icon: '📈', accent: '#14b8a6', iconBg: 'rgba(20,184,166,0.15)',  sub: 'Kapalı / Toplam' },
+    { label: 'Yüksek Öncelik',value: d.highPriorityTickets,icon:'🔴', accent: '#ef4444',iconBg: 'rgba(239,68,68,0.15)',   sub: 'P3 — Acil' },
+  ];
+  document.getElementById('kpi-grid').innerHTML = cards.map(c => `
+    <div class="kpi-card" style="--accent:${c.accent}; --icon-bg:${c.iconBg}">
+      <div class="kpi-icon">${c.icon}</div>
+      <div class="kpi-label">${c.label}</div>
+      <div class="kpi-value">${c.value}</div>
+      <div class="kpi-sub">${c.sub}</div>
+    </div>`).join('');
+}
+
+function renderUserKPIs(d) {
+  const cards = [
+    { label: 'Toplam Kullanıcı', value: d.totalUsers,    icon: '👥', accent: '#6366f1', iconBg: 'rgba(99,102,241,0.15)',  sub: 'Kayıtlı' },
+    { label: 'Öğrenci',          value: d.totalStudents, icon: '🎓', accent: '#3b82f6', iconBg: 'rgba(59,130,246,0.15)',  sub: 'Aktif öğrenci' },
+    { label: 'Personel',         value: d.totalStaff,    icon: '💼', accent: '#8b5cf6', iconBg: 'rgba(139,92,246,0.15)',  sub: 'Destek ekibi' },
+    { label: 'Admin',            value: d.totalAdmins,   icon: '🛡️', accent: '#f97316', iconBg: 'rgba(249,115,22,0.15)',  sub: 'Yönetici' },
+  ];
+  document.getElementById('user-kpi-grid').innerHTML = cards.map(c => `
+    <div class="kpi-card" style="--accent:${c.accent}; --icon-bg:${c.iconBg}">
+      <div class="kpi-icon">${c.icon}</div>
+      <div class="kpi-label">${c.label}</div>
+      <div class="kpi-value">${c.value}</div>
+      <div class="kpi-sub">${c.sub}</div>
+    </div>`).join('');
+}
+
+// ── Charts ────────────────────────────────────────────────────────
+const CHART_DEFAULTS = {
+  color: '#e2e8f0',
+  plugins: { legend: { labels: { color: '#94a3b8', font: { family: 'Inter', size: 12 } } } }
+};
+
+function destroyCharts() {
+  Object.values(charts).forEach(c => c.destroy());
+  charts = {};
+}
+
+function renderStatusChart(d) {
+  charts.status = new Chart(document.getElementById('statusChart'), {
+    type: 'doughnut',
+    data: {
+      labels: ['Açık', 'Devam Eden', 'Kapalı'],
+      datasets: [{
+        data: [d.openTickets, d.inProgressTickets, d.closedTickets],
+        backgroundColor: ['rgba(59,130,246,0.85)', 'rgba(245,158,11,0.85)', 'rgba(16,185,129,0.85)'],
+        borderColor: '#111827', borderWidth: 3, hoverOffset: 6
+      }]
+    },
+    options: {
+      responsive: true, maintainAspectRatio: false, cutout: '65%',
+      plugins: { ...CHART_DEFAULTS.plugins, tooltip: { callbacks: {
+        label: ctx => ` ${ctx.label}: ${ctx.parsed} adet`
+      }}},
+    }
+  });
+}
+
+function renderCategoryChart(d) {
+  charts.category = new Chart(document.getElementById('categoryChart'), {
+    type: 'bar',
+    data: {
+      labels: ['Şikayet', 'Öneri', 'Talep', 'Teşekkür'],
+      datasets: [{
+        label: 'Ticket',
+        data: [d.complaintTickets, d.suggestionTickets, d.requestTickets, d.thanksTickets],
+        backgroundColor: [
+          'rgba(239,68,68,0.75)', 'rgba(99,102,241,0.75)',
+          'rgba(245,158,11,0.75)', 'rgba(16,185,129,0.75)'
+        ],
+        borderRadius: 8, borderSkipped: false
+      }]
+    },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      plugins: { ...CHART_DEFAULTS.plugins, legend: { display: false } },
+      scales: {
+        x: { ticks: { color: '#94a3b8', font: { family: 'Inter' } }, grid: { color: 'rgba(255,255,255,0.05)' } },
+        y: { ticks: { color: '#94a3b8', font: { family: 'Inter' }, stepSize: 1 }, grid: { color: 'rgba(255,255,255,0.05)' } }
+      }
+    }
+  });
+}
+
+function renderTrendChart(d) {
+  const labels = d.last14DaysTrend.map(x => x.date);
+  const values = d.last14DaysTrend.map(x => x.count);
+  charts.trend = new Chart(document.getElementById('trendChart'), {
+    type: 'line',
+    data: {
+      labels,
+      datasets: [{
+        label: 'Yeni Ticket',
+        data: values,
+        borderColor: '#6366f1',
+        backgroundColor: 'rgba(99,102,241,0.08)',
+        borderWidth: 2.5, pointBackgroundColor: '#6366f1',
+        pointRadius: 4, pointHoverRadius: 6, fill: true, tension: 0.4
+      }]
+    },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      plugins: { ...CHART_DEFAULTS.plugins, legend: { display: false } },
+      scales: {
+        x: { ticks: { color: '#64748b', font: { family: 'Inter', size: 11 } }, grid: { color: 'rgba(255,255,255,0.04)' } },
+        y: { ticks: { color: '#64748b', font: { family: 'Inter', size: 11 }, stepSize: 1 }, grid: { color: 'rgba(255,255,255,0.04)' }, beginAtZero: true }
+      }
+    }
+  });
+}
+
+// ── Tables ────────────────────────────────────────────────────────
+function renderDeptTable(d) {
+  const tbody = document.querySelector('#dept-table tbody');
+  tbody.innerHTML = d.ticketsByDepartment.map(dep => {
+    const rate = dep.totalTickets > 0 ? Math.round(dep.closedTickets / dep.totalTickets * 100) : 0;
+    return `<tr>
+      <td><strong>${dep.departmentName}</strong></td>
+      <td>${dep.totalTickets}</td>
+      <td><span class="badge badge-open">${dep.openTickets}</span></td>
+      <td><span class="badge badge-closed">${dep.closedTickets}</span></td>
+      <td>
+        <div style="display:flex;align-items:center;gap:8px">
+          <div style="flex:1;background:rgba(255,255,255,0.08);border-radius:4px;height:6px;overflow:hidden">
+            <div style="height:100%;width:${rate}%;background:linear-gradient(90deg,#10b981,#14b8a6);border-radius:4px"></div>
+          </div>
+          <span style="font-size:12px;color:#94a3b8;min-width:30px">${rate}%</span>
+        </div>
+      </td>
+    </tr>`;
+  }).join('') || '<tr><td colspan="5" style="text-align:center;color:var(--muted)">Departman verisi yok</td></tr>';
+}
+
+function renderRecentTable(d) {
+  const catBadge = c => ({
+    Complaint: 'badge-complaint', Suggestion: 'badge-suggestion',
+    Request: 'badge-request', Thanks: 'badge-thanks'
+  }[c] || '');
+  const statusBadge = s => ({
+    Open:'badge-open', InProgress:'badge-inprog', Closed:'badge-closed'
+  }[s] || '');
+  const statusLabel = s => ({ Open:'Açık', InProgress:'Devam Ediyor', Closed:'Kapalı' }[s] || s);
+  const catLabel = c => ({ Complaint:'Şikayet', Suggestion:'Öneri', Request:'Talep', Thanks:'Teşekkür' }[c] || c);
+
+  const tbody = document.querySelector('#recent-table tbody');
+  tbody.innerHTML = d.recentTickets.map(t => `<tr>
+    <td><span class="priority-dot p${t.priority}"></span></td>
+    <td style="max-width:280px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${t.title}</td>
+    <td><span class="badge ${catBadge(t.category)}">${catLabel(t.category)}</span></td>
+    <td><span class="badge ${statusBadge(t.status)}">${statusLabel(t.status)}</span></td>
+    <td style="color:var(--muted);font-size:12px">${new Date(t.createdAt).toLocaleDateString('tr-TR')}</td>
+  </tr>`).join('') || '<tr><td colspan="5" style="text-align:center;color:var(--muted)">Henüz ticket yok</td></tr>';
+}
+
+// ── Init ──────────────────────────────────────────────────────────
+window.addEventListener('keydown', e => { if (e.key === 'Enter') doLogin(); });
+
+const saved = localStorage.getItem('rimer_token');
+if (saved) {
+  document.getElementById('login-overlay').style.display = 'none';
+  document.getElementById('app').style.display = 'block';
+  loadDashboard();
+}
+</script>
+</body>
+</html>
