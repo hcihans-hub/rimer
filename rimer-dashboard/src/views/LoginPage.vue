@@ -28,17 +28,17 @@ const clusters = [
 const constellationAnchors = [
   // Büyük Ayı (Big Dipper) - kepçe şekli
   { top: '16%', left: '68%', size: '3.5px', color: 'bg-white', shadow: '0 0 10px rgba(255,255,255,0.9)', isTwinkling: false, duration: '0s', delay: '0s', baseOpacity: 1 },
-  { top: '14%', left: '72%', size: '3px', color: 'bg-white', shadow: '0 0 6px rgba(255,255,255,0.8)', isTwinkling: true, duration: '4s', delay: '1s', baseOpacity: 0.95 },
+  { top: '14%', left: '72%', size: '3px', color: 'bg-white', shadow: '0 0 6px rgba(255,255,255,0.8)', isTwinkling: false, duration: '0.2s', delay: '1s', baseOpacity: 0.95 },
   { top: '17%', left: '76%', size: '2.5px', color: 'bg-white', shadow: '0 0 5px rgba(255,255,255,0.7)', isTwinkling: false, duration: '0s', delay: '0s', baseOpacity: 0.9 },
-  { top: '14%', left: '78%', size: '2.8px', color: 'bg-white', shadow: '0 0 5px rgba(255,255,255,0.7)', isTwinkling: true, duration: '5s', delay: '2s', baseOpacity: 0.9 },
+  { top: '14%', left: '78%', size: '2.8px', color: 'bg-white', shadow: '0 0 5px rgba(255,255,255,0.7)', isTwinkling: false, duration: '0.3s', delay: '2s', baseOpacity: 0.9 },
   { top: '12%', left: '82%', size: '2.5px', color: 'bg-white', shadow: 'none', isTwinkling: false, duration: '0s', delay: '0s', baseOpacity: 0.85 },
   { top: '10%', left: '86%', size: '3px', color: 'bg-white', shadow: '0 0 6px rgba(255,255,255,0.8)', isTwinkling: false, duration: '0s', delay: '0s', baseOpacity: 0.95 },
-  { top: '9%', left: '90%', size: '2.5px', color: 'bg-white', shadow: 'none', isTwinkling: true, duration: '3s', delay: '0.5s', baseOpacity: 0.85 },
+  { top: '9%', left: '90%', size: '2.5px', color: 'bg-white', shadow: 'none', isTwinkling: false, duration: '0.15s', delay: '0.5s', baseOpacity: 0.85 },
   // Küçük Ayı + Kutup Yıldızı (Polaris)
   { top: '6%', left: '55%', size: '4.5px', color: 'bg-amber-100', shadow: '0 0 14px rgba(255,255,255,1)', isTwinkling: false, duration: '0s', delay: '0s', baseOpacity: 1 }, // ⭐ Polaris
-  { top: '11%', left: '57%', size: '2px', color: 'bg-white', shadow: 'none', isTwinkling: true, duration: '4s', delay: '1s', baseOpacity: 0.7 },
+  { top: '11%', left: '57%', size: '2px', color: 'bg-white', shadow: 'none', isTwinkling: false, duration: '0.2s', delay: '1s', baseOpacity: 0.7 },
   { top: '13%', left: '60%', size: '2px', color: 'bg-white', shadow: 'none', isTwinkling: false, duration: '0s', delay: '0s', baseOpacity: 0.65 },
-  { top: '18%', left: '59%', size: '1.8px', color: 'bg-white', shadow: 'none', isTwinkling: true, duration: '5s', delay: '3s', baseOpacity: 0.6 },
+  { top: '18%', left: '59%', size: '1.8px', color: 'bg-white', shadow: 'none', isTwinkling: false, duration: '0.3s', delay: '3s', baseOpacity: 0.6 },
   // Orion (Avcı) - omuz, kemer, ayak
   { top: '54%', left: '30%', size: '3px', color: 'bg-blue-300', shadow: '0 0 8px rgba(147,197,253,0.8)', isTwinkling: false, duration: '0s', delay: '0s', baseOpacity: 0.95 }, // Bellatrix
   { top: '61%', left: '24%', size: '2.5px', color: 'bg-white', shadow: '0 0 4px rgba(255,255,255,0.6)', isTwinkling: false, duration: '0s', delay: '0s', baseOpacity: 0.9 }, // Kemer
@@ -46,11 +46,11 @@ const constellationAnchors = [
   { top: '61%', left: '29%', size: '2.5px', color: 'bg-white', shadow: '0 0 4px rgba(255,255,255,0.6)', isTwinkling: false, duration: '0s', delay: '0s', baseOpacity: 0.9 },
   { top: '69%', left: '30%', size: '3.8px', color: 'bg-blue-300', shadow: '0 0 12px rgba(147,197,253,0.9)', isTwinkling: false, duration: '0s', delay: '0s', baseOpacity: 1 }, // Rigel
   // Cassiopeia (W şekli)
-  { top: '8%', left: '38%', size: '2.8px', color: 'bg-white', shadow: '0 0 6px rgba(255,255,255,0.8)', isTwinkling: true, duration: '4s', delay: '0s', baseOpacity: 0.9 },
+  { top: '8%', left: '38%', size: '2.8px', color: 'bg-white', shadow: '0 0 6px rgba(255,255,255,0.8)', isTwinkling: false, duration: '0.2s', delay: '0s', baseOpacity: 0.9 },
   { top: '5%', left: '42%', size: '2.5px', color: 'bg-white', shadow: '0 0 4px rgba(255,255,255,0.6)', isTwinkling: false, duration: '0s', delay: '0s', baseOpacity: 0.85 },
-  { top: '9%', left: '45%', size: '3px', color: 'bg-white', shadow: '0 0 7px rgba(255,255,255,0.8)', isTwinkling: true, duration: '3.5s', delay: '1.5s', baseOpacity: 0.9 },
+  { top: '9%', left: '45%', size: '3px', color: 'bg-white', shadow: '0 0 7px rgba(255,255,255,0.8)', isTwinkling: false, duration: '0.25s', delay: '1.5s', baseOpacity: 0.9 },
   { top: '4%', left: '48%', size: '2.5px', color: 'bg-white', shadow: 'none', isTwinkling: false, duration: '0s', delay: '0s', baseOpacity: 0.8 },
-  { top: '7%', left: '51%', size: '2.8px', color: 'bg-white', shadow: '0 0 5px rgba(255,255,255,0.7)', isTwinkling: true, duration: '5s', delay: '2s', baseOpacity: 0.85 },
+  { top: '7%', left: '51%', size: '2.8px', color: 'bg-white', shadow: '0 0 5px rgba(255,255,255,0.7)', isTwinkling: false, duration: '0.3s', delay: '2s', baseOpacity: 0.85 },
 ]
 
 const stars = Array.from({ length: 600 }, () => {
@@ -82,8 +82,8 @@ const stars = Array.from({ length: 600 }, () => {
 
   return {
     top, left, size, color, shadow,
-    isTwinkling: !isBright,
-    duration: Math.random() * 3 + 2 + 's',
+    isTwinkling: sizeVal <= 0.9 && Math.random() < 0.5,
+    duration: Math.random() * 0.25 + 0.15 + 's',
     delay: Math.random() * 5 + 's',
     baseOpacity: isBright ? 1 : (Math.random() * 0.8 + 0.2)
   }
@@ -182,6 +182,30 @@ const login = async () => {
              }">
         </div>
 
+        <!-- ANDROMEDA GALAKSISI (M31, küçük, soluk) -->
+        <div class="absolute pointer-events-none select-none" style="top:32%;right:12%;width:120px;height:45px;transform:rotate(-35deg);">
+          <div class="absolute" style="inset:-15px;background:radial-gradient(ellipse at 50% 50%,rgba(220,210,200,0.06) 0%,rgba(200,190,180,0.03) 40%,transparent 70%);filter:blur(8px);"></div>
+          <div class="absolute" style="inset:0;background:radial-gradient(ellipse at 50% 50%,rgba(255,245,230,0.1) 0%,rgba(220,210,190,0.05) 45%,transparent 75%);filter:blur(5px);"></div>
+          <div class="absolute" style="top:50%;left:50%;transform:translate(-50%,-50%);width:18px;height:8px;background:radial-gradient(ellipse at 50% 50%,rgba(255,250,235,0.45) 0%,rgba(255,240,210,0.2) 50%,transparent 80%);filter:blur(2px);border-radius:50%;"></div>
+          <div class="absolute rounded-full" style="top:50%;left:50%;transform:translate(-50%,-50%);width:2px;height:2px;background:rgba(255,252,240,0.7);box-shadow:0 0 4px 1px rgba(255,245,220,0.4);"></div>
+        </div>
+
+        <!-- UZAK GALAKSI 1 (Yatay, çok soluk) -->
+        <div class="absolute pointer-events-none select-none" style="top:65%;left:20%;width:90px;height:30px;transform:rotate(15deg);">
+          <div class="absolute" style="inset:-10px;background:radial-gradient(ellipse at 50% 50%,rgba(180,210,255,0.05) 0%,transparent 70%);filter:blur(6px);"></div>
+          <div class="absolute" style="inset:0;background:radial-gradient(ellipse at 50% 50%,rgba(220,235,255,0.08) 0%,transparent 75%);filter:blur(4px);"></div>
+          <div class="absolute" style="top:50%;left:50%;transform:translate(-50%,-50%);width:12px;height:5px;background:radial-gradient(ellipse at 50% 50%,rgba(255,255,255,0.3) 0%,transparent 80%);filter:blur(1px);border-radius:50%;"></div>
+          <div class="absolute rounded-full" style="top:50%;left:50%;transform:translate(-50%,-50%);width:1.5px;height:1.5px;background:rgba(255,255,255,0.6);box-shadow:0 0 3px 1px rgba(220,235,255,0.3);"></div>
+        </div>
+
+        <!-- UZAK GALAKSI 2 (Dikeyimsi, soluk, küçük) -->
+        <div class="absolute pointer-events-none select-none" style="top:20%;left:40%;width:60px;height:20px;transform:rotate(75deg);">
+          <div class="absolute" style="inset:-8px;background:radial-gradient(ellipse at 50% 50%,rgba(255,200,200,0.05) 0%,transparent 70%);filter:blur(5px);"></div>
+          <div class="absolute" style="inset:0;background:radial-gradient(ellipse at 50% 50%,rgba(255,230,230,0.07) 0%,transparent 75%);filter:blur(3px);"></div>
+          <div class="absolute" style="top:50%;left:50%;transform:translate(-50%,-50%);width:8px;height:4px;background:radial-gradient(ellipse at 50% 50%,rgba(255,255,255,0.25) 0%,transparent 80%);filter:blur(1px);border-radius:50%;"></div>
+          <div class="absolute rounded-full" style="top:50%;left:50%;transform:translate(-50%,-50%);width:1px;height:1px;background:rgba(255,255,255,0.5);"></div>
+        </div>
+
         <!-- THE MOON (Realistic Photo, transparent PNG) -->
         <div class="absolute top-28 left-16 md:top-[108px] md:left-[72px] w-16 h-16 md:w-20 md:h-20 select-none pointer-events-none">
           <!-- Yıldızları maskeleyen dolu daire (arka plan rengi) -->
@@ -223,31 +247,25 @@ const login = async () => {
         <div class="absolute w-[100px] h-[2px] bg-gradient-to-r from-transparent via-blue-200 to-white opacity-0 animate-shooting-star-2" style="top: -10%; left: 40%; border-radius: 50%; filter: drop-shadow(0 0 6px rgba(255,255,255,0.8));"></div>
 
         <!-- SATELLITES -->
-        <!-- Satellite 1: Soldan sağa yavaş (hızı artırıldı) -->
-        <div class="absolute animate-satellite-orbit-1 flex items-center justify-center opacity-80">
-          <div class="w-3 h-5 bg-slate-600/80 border border-slate-500 rounded-sm"></div>
-          <div class="w-2.5 h-2.5 bg-slate-100 rounded-full mx-1 relative shadow-[0_0_15px_rgba(255,255,255,1)]">
-            <div class="absolute inset-0 bg-white rounded-full animate-[pulse_1s_ease-in-out_infinite]"></div>
+        <!-- Satellite 1: Soldan sağa yavaş -->
+        <div class="absolute animate-satellite-orbit-1 flex items-center justify-center opacity-75">
+          <div class="w-[2px] h-[2px] bg-white rounded-full relative" style="box-shadow: 0 0 2px 1px rgba(255,255,255,0.6), 0 0 5px 1px rgba(255,255,255,0.3);">
+            <div class="absolute inset-0 bg-white rounded-full animate-[pulse_1s_ease-in-out_infinite]" style="box-shadow: 0 0 6px 2px rgba(255,255,255,0.2);"></div>
           </div>
-          <div class="w-3 h-5 bg-slate-600/80 border border-slate-500 rounded-sm"></div>
         </div>
 
-        <!-- Satellite 2: Sağ üstten sol alta çapraz, farklı hız -->
-        <div class="absolute animate-satellite-orbit-2 flex items-center justify-center opacity-75">
-          <div class="w-3 h-4 bg-slate-700/80 border border-slate-600 rounded-sm"></div>
-          <div class="w-2 h-2 bg-slate-100 rounded-full mx-1 relative shadow-[0_0_12px_rgba(255,255,255,1)]">
-            <div class="absolute inset-0 bg-white rounded-full animate-[pulse_2s_ease-in-out_infinite]"></div>
+        <!-- Satellite 2: Sağ üstten sol alta çapraz -->
+        <div class="absolute animate-satellite-orbit-2 flex items-center justify-center opacity-60">
+          <div class="w-[1.5px] h-[1.5px] bg-white rounded-full relative" style="box-shadow: 0 0 1px 1px rgba(255,255,255,0.5), 0 0 3px 1px rgba(255,255,255,0.2);">
+            <div class="absolute inset-0 bg-white rounded-full animate-[pulse_1.5s_ease-in-out_infinite]" style="box-shadow: 0 0 4px 1px rgba(255,255,255,0.1);"></div>
           </div>
-          <div class="w-3 h-4 bg-slate-700/80 border border-slate-600 rounded-sm"></div>
         </div>
 
         <!-- Satellite 3: Aşağıdan yukarıya farklı bir açıyla -->
         <div class="absolute animate-satellite-orbit-3 flex items-center justify-center opacity-70">
-          <div class="w-2 h-4 bg-slate-500/80 border border-slate-400 rounded-sm"></div>
-          <div class="w-2 h-2 bg-slate-100 rounded-full mx-0.5 relative shadow-[0_0_12px_rgba(255,255,255,1)]">
-            <div class="absolute inset-0 bg-white rounded-full animate-[pulse_1.5s_ease-in-out_infinite]"></div>
+          <div class="w-[2px] h-[2px] bg-white rounded-full relative" style="box-shadow: 0 0 2px 1px rgba(255,255,255,0.6), 0 0 4px 1px rgba(255,255,255,0.3);">
+            <div class="absolute inset-0 bg-white rounded-full animate-[pulse_1.2s_ease-in-out_infinite]" style="box-shadow: 0 0 5px 2px rgba(255,255,255,0.2);"></div>
           </div>
-          <div class="w-2 h-4 bg-slate-500/80 border border-slate-400 rounded-sm"></div>
         </div>
       </div>
 
@@ -305,7 +323,7 @@ const login = async () => {
             <!-- Antenna Pole -->
             <line x1="50" y1="20" x2="50" y2="0" stroke="currentColor" stroke-width="2.5" />
             <!-- Red Signal Light -->
-            <circle cx="50" cy="0" r="4" fill="#ef4444" class="animate-morse-blink" style="filter: drop-shadow(0 0 5px rgba(239, 68, 68, 1));" />
+            <circle cx="50" cy="0" r="4" fill="#f97316" class="animate-morse-blink" style="filter: drop-shadow(0 0 7px rgba(251, 146, 60, 1)) drop-shadow(0 0 14px rgba(249, 115, 22, 0.8));" />
           </svg>
         </div>
       </div>
@@ -475,7 +493,7 @@ const login = async () => {
 
 @keyframes twinkle {
   0%, 100% { opacity: 1; transform: scale(1); }
-  50% { opacity: 0.2; transform: scale(0.9); }
+  50% { opacity: 0.5; transform: scale(0.95); }
 }
 .animate-twinkle {
   animation: twinkle 3s ease-in-out infinite;
@@ -553,354 +571,308 @@ const login = async () => {
 .list-leave-to { opacity: 0; transform: translateY(15px); }
 
 .animate-morse-blink {
-  animation: morse-blink 42.3s linear infinite;
+  animation: morse-blink 66.8s linear infinite;
 }
 
 @keyframes morse-blink {
   0.00% { opacity: 1; }
-  0.29% { opacity: 1; }
-  0.30% { opacity: 0; }
-  1.19% { opacity: 0; }
-  1.20% { opacity: 1; }
-  1.49% { opacity: 1; }
-  1.50% { opacity: 0; }
-  1.79% { opacity: 0; }
+  0.18% { opacity: 0; }
+  0.36% { opacity: 1; }
+  0.90% { opacity: 0; }
+  1.08% { opacity: 1; }
+  1.62% { opacity: 0; }
   1.80% { opacity: 1; }
-  2.69% { opacity: 1; }
-  2.70% { opacity: 0; }
-  3.59% { opacity: 0; }
-  3.60% { opacity: 1; }
-  3.89% { opacity: 1; }
-  3.90% { opacity: 0; }
-  4.19% { opacity: 0; }
-  4.20% { opacity: 1; }
-  5.10% { opacity: 1; }
-  5.11% { opacity: 0; }
-  5.40% { opacity: 0; }
-  5.41% { opacity: 1; }
-  5.70% { opacity: 1; }
-  5.71% { opacity: 0; }
-  6.00% { opacity: 0; }
-  6.01% { opacity: 1; }
-  6.30% { opacity: 1; }
-  6.31% { opacity: 0; }
-  7.20% { opacity: 0; }
-  7.21% { opacity: 1; }
-  7.50% { opacity: 1; }
-  7.51% { opacity: 0; }
-  7.80% { opacity: 0; }
-  7.81% { opacity: 1; }
-  8.70% { opacity: 1; }
-  8.71% { opacity: 0; }
-  9.00% { opacity: 0; }
-  9.01% { opacity: 1; }
-  9.30% { opacity: 1; }
-  9.31% { opacity: 0; }
-  9.60% { opacity: 0; }
-  9.61% { opacity: 1; }
-  9.90% { opacity: 1; }
-  9.91% { opacity: 0; }
-  10.80% { opacity: 0; }
-  10.81% { opacity: 1; }
-  11.10% { opacity: 1; }
-  11.11% { opacity: 0; }
-  11.40% { opacity: 0; }
-  11.41% { opacity: 1; }
-  12.30% { opacity: 1; }
-  12.31% { opacity: 0; }
-  13.20% { opacity: 0; }
-  13.21% { opacity: 1; }
-  13.50% { opacity: 1; }
-  13.51% { opacity: 0; }
-  13.80% { opacity: 0; }
-  13.81% { opacity: 1; }
-  14.10% { opacity: 1; }
-  14.11% { opacity: 0; }
-  14.40% { opacity: 0; }
-  14.41% { opacity: 1; }
-  14.70% { opacity: 1; }
-  14.71% { opacity: 0; }
-  15.01% { opacity: 0; }
-  15.02% { opacity: 1; }
-  15.31% { opacity: 1; }
-  15.32% { opacity: 0; }
-  16.21% { opacity: 0; }
-  16.22% { opacity: 1; }
-  17.11% { opacity: 1; }
-  17.12% { opacity: 0; }
-  17.41% { opacity: 0; }
-  17.42% { opacity: 1; }
+  1.97% { opacity: 0; }
+  2.15% { opacity: 1; }
+  2.33% { opacity: 0; }
+  2.87% { opacity: 1; }
+  3.05% { opacity: 0; }
+  3.23% { opacity: 1; }
+  3.41% { opacity: 0; }
+  3.59% { opacity: 1; }
+  4.13% { opacity: 0; }
+  4.31% { opacity: 1; }
+  4.85% { opacity: 0; }
+  5.39% { opacity: 1; }
+  5.57% { opacity: 0; }
+  5.75% { opacity: 1; }
+  6.28% { opacity: 0; }
+  6.46% { opacity: 1; }
+  7.00% { opacity: 0; }
+  7.18% { opacity: 1; }
+  7.36% { opacity: 0; }
+  7.90% { opacity: 1; }
+  8.08% { opacity: 0; }
+  8.26% { opacity: 1; }
+  8.44% { opacity: 0; }
+  8.62% { opacity: 1; }
+  8.80% { opacity: 0; }
+  8.98% { opacity: 1; }
+  9.16% { opacity: 0; }
+  9.69% { opacity: 1; }
+  9.87% { opacity: 0; }
+  10.41% { opacity: 1; }
+  10.59% { opacity: 0; }
+  10.77% { opacity: 1; }
+  10.95% { opacity: 0; }
+  11.13% { opacity: 1; }
+  11.31% { opacity: 0; }
+  11.85% { opacity: 1; }
+  12.03% { opacity: 0; }
+  12.21% { opacity: 1; }
+  12.39% { opacity: 0; }
+  12.93% { opacity: 1; }
+  13.46% { opacity: 0; }
+  13.64% { opacity: 1; }
+  14.18% { opacity: 0; }
+  14.36% { opacity: 1; }
+  14.54% { opacity: 0; }
+  14.72% { opacity: 1; }
+  14.90% { opacity: 0; }
+  16.16% { opacity: 1; }
+  16.70% { opacity: 0; }
+  16.88% { opacity: 1; }
+  17.06% { opacity: 0; }
+  17.24% { opacity: 1; }
+  17.77% { opacity: 0; }
   18.31% { opacity: 1; }
-  18.32% { opacity: 0; }
-  18.61% { opacity: 0; }
-  18.62% { opacity: 1; }
-  18.91% { opacity: 1; }
-  18.92% { opacity: 0; }
-  19.21% { opacity: 0; }
-  19.22% { opacity: 1; }
-  19.51% { opacity: 1; }
-  19.52% { opacity: 0; }
-  19.81% { opacity: 0; }
-  19.82% { opacity: 1; }
-  20.71% { opacity: 1; }
-  20.72% { opacity: 0; }
+  18.49% { opacity: 0; }
+  18.67% { opacity: 1; }
+  18.85% { opacity: 0; }
+  19.39% { opacity: 1; }
+  19.93% { opacity: 0; }
+  20.11% { opacity: 1; }
+  20.65% { opacity: 0; }
+  20.83% { opacity: 1; }
   21.01% { opacity: 0; }
-  21.02% { opacity: 1; }
-  21.91% { opacity: 1; }
-  21.92% { opacity: 0; }
-  24.01% { opacity: 0; }
-  24.02% { opacity: 1; }
-  24.91% { opacity: 1; }
-  24.92% { opacity: 0; }
-  25.22% { opacity: 0; }
-  25.23% { opacity: 1; }
-  25.52% { opacity: 1; }
-  25.53% { opacity: 0; }
-  25.82% { opacity: 0; }
-  25.83% { opacity: 1; }
-  26.72% { opacity: 1; }
-  26.73% { opacity: 0; }
-  27.02% { opacity: 0; }
-  27.03% { opacity: 1; }
-  27.92% { opacity: 1; }
-  27.93% { opacity: 0; }
-  28.82% { opacity: 0; }
-  28.83% { opacity: 1; }
-  29.12% { opacity: 1; }
-  29.13% { opacity: 0; }
-  29.42% { opacity: 0; }
-  29.43% { opacity: 1; }
-  30.32% { opacity: 1; }
-  30.33% { opacity: 0; }
-  31.22% { opacity: 0; }
-  31.23% { opacity: 1; }
-  31.52% { opacity: 1; }
-  31.53% { opacity: 0; }
-  31.82% { opacity: 0; }
-  31.83% { opacity: 1; }
-  32.72% { opacity: 1; }
-  32.73% { opacity: 0; }
-  33.02% { opacity: 0; }
-  33.03% { opacity: 1; }
-  33.92% { opacity: 1; }
+  21.18% { opacity: 1; }
+  21.36% { opacity: 0; }
+  21.54% { opacity: 1; }
+  22.08% { opacity: 0; }
+  22.26% { opacity: 1; }
+  22.80% { opacity: 0; }
+  24.06% { opacity: 1; }
+  24.24% { opacity: 0; }
+  24.42% { opacity: 1; }
+  24.96% { opacity: 0; }
+  25.49% { opacity: 1; }
+  25.67% { opacity: 0; }
+  25.85% { opacity: 1; }
+  26.39% { opacity: 0; }
+  26.57% { opacity: 1; }
+  26.75% { opacity: 0; }
+  26.93% { opacity: 1; }
+  27.11% { opacity: 0; }
+  27.65% { opacity: 1; }
+  27.83% { opacity: 0; }
+  28.01% { opacity: 1; }
+  28.55% { opacity: 0; }
+  28.73% { opacity: 1; }
+  28.90% { opacity: 0; }
+  29.08% { opacity: 1; }
+  29.26% { opacity: 0; }
+  29.80% { opacity: 1; }
+  29.98% { opacity: 0; }
+  30.16% { opacity: 1; }
+  30.70% { opacity: 0; }
+  31.24% { opacity: 1; }
+  31.42% { opacity: 0; }
+  31.60% { opacity: 1; }
+  31.78% { opacity: 0; }
+  31.96% { opacity: 1; }
+  32.14% { opacity: 0; }
+  32.32% { opacity: 1; }
+  32.50% { opacity: 0; }
+  33.75% { opacity: 1; }
   33.93% { opacity: 0; }
-  34.22% { opacity: 0; }
-  34.23% { opacity: 1; }
-  34.52% { opacity: 1; }
-  34.53% { opacity: 0; }
-  35.43% { opacity: 0; }
-  35.44% { opacity: 1; }
-  36.33% { opacity: 1; }
-  36.34% { opacity: 0; }
-  37.23% { opacity: 0; }
-  37.24% { opacity: 1; }
-  37.53% { opacity: 1; }
-  37.54% { opacity: 0; }
-  37.83% { opacity: 0; }
-  37.84% { opacity: 1; }
-  38.13% { opacity: 1; }
-  38.14% { opacity: 0; }
-  39.03% { opacity: 0; }
-  39.04% { opacity: 1; }
-  39.93% { opacity: 1; }
-  39.94% { opacity: 0; }
-  40.23% { opacity: 0; }
-  40.24% { opacity: 1; }
-  40.53% { opacity: 1; }
-  40.54% { opacity: 0; }
-  40.83% { opacity: 0; }
-  40.84% { opacity: 1; }
-  41.73% { opacity: 1; }
-  41.74% { opacity: 0; }
-  42.63% { opacity: 0; }
-  42.64% { opacity: 1; }
-  42.93% { opacity: 1; }
-  42.94% { opacity: 0; }
-  43.23% { opacity: 0; }
-  43.24% { opacity: 1; }
-  44.13% { opacity: 1; }
-  44.14% { opacity: 0; }
-  44.43% { opacity: 0; }
-  44.44% { opacity: 1; }
-  44.73% { opacity: 1; }
-  44.74% { opacity: 0; }
-  45.04% { opacity: 0; }
-  45.05% { opacity: 1; }
-  45.34% { opacity: 1; }
-  45.35% { opacity: 0; }
-  46.24% { opacity: 0; }
-  46.25% { opacity: 1; }
-  46.54% { opacity: 1; }
-  46.55% { opacity: 0; }
-  46.84% { opacity: 0; }
-  46.85% { opacity: 1; }
-  47.74% { opacity: 1; }
-  47.75% { opacity: 0; }
-  48.64% { opacity: 0; }
-  48.65% { opacity: 1; }
-  48.94% { opacity: 1; }
-  48.95% { opacity: 0; }
-  49.24% { opacity: 0; }
-  49.25% { opacity: 1; }
-  50.14% { opacity: 1; }
-  50.15% { opacity: 0; }
-  50.44% { opacity: 0; }
-  50.45% { opacity: 1; }
-  50.74% { opacity: 1; }
-  50.75% { opacity: 0; }
-  51.64% { opacity: 0; }
-  51.65% { opacity: 1; }
-  51.94% { opacity: 1; }
-  51.95% { opacity: 0; }
-  52.24% { opacity: 0; }
-  52.25% { opacity: 1; }
-  52.54% { opacity: 1; }
-  52.55% { opacity: 0; }
-  53.44% { opacity: 0; }
-  53.45% { opacity: 1; }
-  54.34% { opacity: 1; }
-  54.35% { opacity: 0; }
-  54.64% { opacity: 0; }
-  54.65% { opacity: 1; }
-  54.94% { opacity: 1; }
-  54.95% { opacity: 0; }
-  55.85% { opacity: 0; }
-  55.86% { opacity: 1; }
-  56.15% { opacity: 1; }
-  56.16% { opacity: 0; }
-  56.45% { opacity: 0; }
-  56.46% { opacity: 1; }
-  56.75% { opacity: 1; }
-  56.76% { opacity: 0; }
-  57.65% { opacity: 0; }
-  57.66% { opacity: 1; }
-  58.55% { opacity: 1; }
-  58.56% { opacity: 0; }
-  58.85% { opacity: 0; }
-  58.86% { opacity: 1; }
-  59.75% { opacity: 1; }
-  59.76% { opacity: 0; }
-  60.05% { opacity: 0; }
-  60.06% { opacity: 1; }
-  60.35% { opacity: 1; }
-  60.36% { opacity: 0; }
-  60.65% { opacity: 0; }
-  60.66% { opacity: 1; }
-  60.95% { opacity: 1; }
-  60.96% { opacity: 0; }
-  61.85% { opacity: 0; }
-  61.86% { opacity: 1; }
-  62.15% { opacity: 1; }
-  62.16% { opacity: 0; }
-  62.45% { opacity: 0; }
-  62.46% { opacity: 1; }
-  62.75% { opacity: 1; }
-  62.76% { opacity: 0; }
-  64.85% { opacity: 0; }
-  64.86% { opacity: 1; }
-  65.76% { opacity: 1; }
-  65.77% { opacity: 0; }
-  66.06% { opacity: 0; }
+  34.11% { opacity: 1; }
+  34.29% { opacity: 0; }
+  34.47% { opacity: 1; }
+  34.65% { opacity: 0; }
+  34.83% { opacity: 1; }
+  35.01% { opacity: 0; }
+  35.55% { opacity: 1; }
+  35.73% { opacity: 0; }
+  36.27% { opacity: 1; }
+  36.45% { opacity: 0; }
+  36.62% { opacity: 1; }
+  37.16% { opacity: 0; }
+  37.34% { opacity: 1; }
+  37.52% { opacity: 0; }
+  38.78% { opacity: 1; }
+  38.96% { opacity: 0; }
+  39.14% { opacity: 1; }
+  39.68% { opacity: 0; }
+  39.86% { opacity: 1; }
+  40.39% { opacity: 0; }
+  40.57% { opacity: 1; }
+  40.75% { opacity: 0; }
+  40.93% { opacity: 1; }
+  41.11% { opacity: 0; }
+  41.65% { opacity: 1; }
+  41.83% { opacity: 0; }
+  42.37% { opacity: 1; }
+  42.91% { opacity: 0; }
+  43.09% { opacity: 1; }
+  43.27% { opacity: 0; }
+  43.45% { opacity: 1; }
+  43.99% { opacity: 0; }
+  44.17% { opacity: 1; }
+  44.70% { opacity: 0; }
+  45.24% { opacity: 1; }
+  45.42% { opacity: 0; }
+  45.60% { opacity: 1; }
+  45.78% { opacity: 0; }
+  47.04% { opacity: 1; }
+  47.22% { opacity: 0; }
+  47.40% { opacity: 1; }
+  47.58% { opacity: 0; }
+  48.11% { opacity: 1; }
+  48.29% { opacity: 0; }
+  48.47% { opacity: 1; }
+  49.01% { opacity: 0; }
+  49.19% { opacity: 1; }
+  49.73% { opacity: 0; }
+  49.91% { opacity: 1; }
+  50.09% { opacity: 0; }
+  50.27% { opacity: 1; }
+  50.45% { opacity: 0; }
+  50.99% { opacity: 1; }
+  51.17% { opacity: 0; }
+  51.35% { opacity: 1; }
+  51.53% { opacity: 0; }
+  52.06% { opacity: 1; }
+  52.60% { opacity: 0; }
+  53.14% { opacity: 1; }
+  53.32% { opacity: 0; }
+  53.86% { opacity: 1; }
+  54.40% { opacity: 0; }
+  54.58% { opacity: 1; }
+  54.76% { opacity: 0; }
+  55.30% { opacity: 1; }
+  55.83% { opacity: 0; }
+  56.01% { opacity: 1; }
+  56.19% { opacity: 0; }
+  56.37% { opacity: 1; }
+  56.55% { opacity: 0; }
+  57.09% { opacity: 1; }
+  57.27% { opacity: 0; }
+  57.45% { opacity: 1; }
+  57.63% { opacity: 0; }
+  58.17% { opacity: 1; }
+  58.35% { opacity: 0; }
+  58.53% { opacity: 1; }
+  59.07% { opacity: 0; }
+  59.25% { opacity: 1; }
+  59.43% { opacity: 0; }
+  59.96% { opacity: 1; }
+  60.50% { opacity: 0; }
+  60.68% { opacity: 1; }
+  60.86% { opacity: 0; }
+  61.04% { opacity: 1; }
+  61.58% { opacity: 0; }
+  61.76% { opacity: 1; }
+  61.94% { opacity: 0; }
+  62.12% { opacity: 1; }
+  62.66% { opacity: 0; }
+  62.84% { opacity: 1; }
+  63.02% { opacity: 0; }
+  64.27% { opacity: 1; }
+  64.45% { opacity: 0; }
+  64.63% { opacity: 1; }
+  64.81% { opacity: 0; }
+  64.99% { opacity: 1; }
+  65.17% { opacity: 0; }
+  65.35% { opacity: 1; }
+  65.53% { opacity: 0; }
   66.07% { opacity: 1; }
-  66.96% { opacity: 1; }
+  66.25% { opacity: 0; }
+  66.79% { opacity: 1; }
   66.97% { opacity: 0; }
-  67.26% { opacity: 0; }
-  67.27% { opacity: 1; }
-  67.56% { opacity: 1; }
-  67.57% { opacity: 0; }
-  68.46% { opacity: 0; }
-  68.47% { opacity: 1; }
-  69.36% { opacity: 1; }
-  69.37% { opacity: 0; }
-  69.66% { opacity: 0; }
-  69.67% { opacity: 1; }
-  70.56% { opacity: 1; }
-  70.57% { opacity: 0; }
-  70.86% { opacity: 0; }
-  70.87% { opacity: 1; }
-  71.76% { opacity: 1; }
-  71.77% { opacity: 0; }
-  72.06% { opacity: 0; }
-  72.07% { opacity: 1; }
-  72.36% { opacity: 1; }
-  72.37% { opacity: 0; }
-  73.26% { opacity: 0; }
-  73.27% { opacity: 1; }
-  73.56% { opacity: 1; }
-  73.57% { opacity: 0; }
-  73.86% { opacity: 0; }
-  73.87% { opacity: 1; }
-  74.76% { opacity: 1; }
-  74.77% { opacity: 0; }
-  75.07% { opacity: 0; }
-  75.08% { opacity: 1; }
-  75.37% { opacity: 1; }
-  75.38% { opacity: 0; }
-  76.27% { opacity: 0; }
-  76.28% { opacity: 1; }
-  77.17% { opacity: 1; }
-  77.18% { opacity: 0; }
-  77.47% { opacity: 0; }
-  77.48% { opacity: 1; }
-  78.37% { opacity: 1; }
-  78.38% { opacity: 0; }
-  79.27% { opacity: 0; }
-  79.28% { opacity: 1; }
-  79.57% { opacity: 1; }
-  79.58% { opacity: 0; }
-  80.47% { opacity: 0; }
-  80.48% { opacity: 1; }
-  81.37% { opacity: 1; }
-  81.38% { opacity: 0; }
-  81.67% { opacity: 0; }
-  81.68% { opacity: 1; }
-  81.97% { opacity: 1; }
-  81.98% { opacity: 0; }
-  82.27% { opacity: 0; }
-  82.28% { opacity: 1; }
-  83.17% { opacity: 1; }
-  83.18% { opacity: 0; }
-  84.07% { opacity: 0; }
-  84.08% { opacity: 1; }
-  84.97% { opacity: 1; }
-  84.98% { opacity: 0; }
-  85.88% { opacity: 0; }
-  85.89% { opacity: 1; }
-  86.18% { opacity: 1; }
-  86.19% { opacity: 0; }
-  87.08% { opacity: 0; }
-  87.09% { opacity: 1; }
-  87.98% { opacity: 1; }
-  87.99% { opacity: 0; }
-  88.28% { opacity: 0; }
-  88.29% { opacity: 1; }
-  88.58% { opacity: 1; }
-  88.59% { opacity: 0; }
-  88.88% { opacity: 0; }
-  88.89% { opacity: 1; }
-  89.18% { opacity: 1; }
-  89.19% { opacity: 0; }
-  90.08% { opacity: 0; }
-  90.09% { opacity: 1; }
-  90.38% { opacity: 1; }
-  90.39% { opacity: 0; }
-  90.68% { opacity: 0; }
-  90.69% { opacity: 1; }
-  90.98% { opacity: 1; }
-  90.99% { opacity: 0; }
-  91.88% { opacity: 0; }
-  91.89% { opacity: 1; }
-  92.18% { opacity: 1; }
-  92.19% { opacity: 0; }
-  92.48% { opacity: 0; }
-  92.49% { opacity: 1; }
-  93.38% { opacity: 1; }
-  93.39% { opacity: 0; }
-  93.68% { opacity: 0; }
-  93.69% { opacity: 1; }
-  93.98% { opacity: 1; }
-  93.99% { opacity: 0; }
-  99.99% { opacity: 0; }
+  67.15% { opacity: 1; }
+  67.68% { opacity: 0; }
+  67.86% { opacity: 1; }
+  68.04% { opacity: 0; }
+  69.30% { opacity: 1; }
+  69.48% { opacity: 0; }
+  69.66% { opacity: 1; }
+  70.20% { opacity: 0; }
+  70.38% { opacity: 1; }
+  70.92% { opacity: 0; }
+  71.10% { opacity: 1; }
+  71.27% { opacity: 0; }
+  71.45% { opacity: 1; }
+  71.63% { opacity: 0; }
+  72.17% { opacity: 1; }
+  72.35% { opacity: 0; }
+  72.89% { opacity: 1; }
+  73.43% { opacity: 0; }
+  73.61% { opacity: 1; }
+  73.79% { opacity: 0; }
+  73.97% { opacity: 1; }
+  74.51% { opacity: 0; }
+  74.69% { opacity: 1; }
+  75.22% { opacity: 0; }
+  75.76% { opacity: 1; }
+  75.94% { opacity: 0; }
+  76.12% { opacity: 1; }
+  76.30% { opacity: 0; }
+  77.56% { opacity: 1; }
+  78.10% { opacity: 0; }
+  78.28% { opacity: 1; }
+  78.82% { opacity: 0; }
+  78.99% { opacity: 1; }
+  79.17% { opacity: 0; }
+  79.71% { opacity: 1; }
+  80.25% { opacity: 0; }
+  80.43% { opacity: 1; }
+  80.97% { opacity: 0; }
+  81.15% { opacity: 1; }
+  81.69% { opacity: 0; }
+  81.87% { opacity: 1; }
+  82.05% { opacity: 0; }
+  82.59% { opacity: 1; }
+  82.76% { opacity: 0; }
+  82.94% { opacity: 1; }
+  83.48% { opacity: 0; }
+  83.66% { opacity: 1; }
+  83.84% { opacity: 0; }
+  84.38% { opacity: 1; }
+  84.56% { opacity: 0; }
+  85.10% { opacity: 1; }
+  85.64% { opacity: 0; }
+  85.82% { opacity: 1; }
+  86.00% { opacity: 0; }
+  86.54% { opacity: 1; }
+  87.07% { opacity: 0; }
+  87.25% { opacity: 1; }
+  87.43% { opacity: 0; }
+  87.61% { opacity: 1; }
+  87.79% { opacity: 0; }
+  88.33% { opacity: 1; }
+  88.51% { opacity: 0; }
+  88.69% { opacity: 1; }
+  88.87% { opacity: 0; }
+  89.41% { opacity: 1; }
+  89.59% { opacity: 0; }
+  89.77% { opacity: 1; }
+  90.31% { opacity: 0; }
+  90.48% { opacity: 1; }
+  90.66% { opacity: 0; }
+  91.20% { opacity: 1; }
+  91.38% { opacity: 0; }
+  91.56% { opacity: 1; }
+  92.10% { opacity: 0; }
+  92.28% { opacity: 1; }
+  92.46% { opacity: 0; }
+  92.64% { opacity: 1; }
+  93.18% { opacity: 0; }
+  93.36% { opacity: 1; }
+  93.54% { opacity: 0; }
+  93.72% { opacity: 1; }
+  94.25% { opacity: 0; }
+  94.43% { opacity: 1; }
+  94.61% { opacity: 0; }
   100% { opacity: 0; }
 }
 </style>
