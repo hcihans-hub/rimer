@@ -7,7 +7,7 @@
 
 ![RİMER Ekran Görüntüsü](docs/chaosengineeringtest.png)
 
-![RİMER Ekran Görüntüsü](docs/Production-GradeWebSocketAltyapıTest.png)
+![RİMER Ekran Görüntüsü](docs/Production-GradeWebSocketAltyapiTest.png)
 
 
 
